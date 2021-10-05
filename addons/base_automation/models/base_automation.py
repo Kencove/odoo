@@ -338,7 +338,7 @@ class BaseAutomation(models.Model):
                 # read old values before the update
                 old_values = {
                     old_vals.pop('id'): old_vals
-                    for old_vals in (records.read(list(vals)) if vals else [])
+                    for old_vals in (records.sudo().read(list(vals)) if vals else [])
                 }
                 # call original method
                 write.origin(records, vals, **kw)
