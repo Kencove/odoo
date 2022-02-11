@@ -30,6 +30,7 @@ MarkupSafe==1.1.0
 num2words==0.5.6
 ofxparse==0.19; python_version <= '3.9'
 ofxparse==0.21; python_version > '3.9'  # (Jammy) ABC removed from collections in 3.10 but still used in ofxparse < 0.21
+packaging==21.3
 passlib==1.7.1
 Pillow==5.4.1 ; python_version <= '3.7' and sys_platform != 'win32'
 Pillow==6.1.0 ; python_version <= '3.7' and sys_platform == 'win32'
