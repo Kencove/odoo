@@ -5,8 +5,10 @@ __import__('os').environ['TZ'] = 'UTC'
 import odoo
 import pyroscope
 pyroscope.configure(
-    application_name = "odoo.app",
-    server_address   = "http://pyroscope:4040",
+    application_name="odoo.app",
+    server_address="http://pyroscope:4040",
+    detect_subprocesses=True,
+    oncpu=False,
     )
 
 if __name__ == "__main__":
