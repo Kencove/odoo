@@ -1361,6 +1361,7 @@ class MrpProduction(models.Model):
         orders in exception """
         self.workorder_ids.filtered(lambda x: x.state not in ['done', 'cancel']).action_cancel()
         if not self.move_raw_ids:
+            self.move_finished_ids.filtered(lambda x: x.state not in ('done', 'cancel'))._action_cancel()
             self.state = 'cancel'
             return True
         self._action_cancel()
