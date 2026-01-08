@@ -9,7 +9,10 @@ _logger = logging.getLogger(__name__)
 _flanker_lib_warning = False
 
 try:
-    from flanker.addresslib import address
+    import warnings
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", DeprecationWarning)
+        from flanker.addresslib import address
     # Avoid warning each time a mx server is not reachable by flanker
     logging.getLogger("flanker.addresslib.validate").setLevel(logging.ERROR)
 
