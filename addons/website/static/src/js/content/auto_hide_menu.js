@@ -10,8 +10,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (header) {
         const topMenu = header.querySelector('#top_menu');
         const unfoldable = ".divider, .divider ~ li, .o_no_autohide_item, .js_language_selector";
-        if (!topMenu.querySelector(`:scope > :not(${unfoldable})`)
-                || header.classList.contains("o_no_autohide_menu")) {
+        // Use CSS3-compatible check instead of CSS4 :not() with multiple selectors
+        // which is not supported in older browsers (Safari < 15.4, etc)
+        const hasNonUnfoldableItems = [...topMenu.children].some(child => {
+            return !child.matches('.divider') &&
+                   !child.matches('.o_no_autohide_item') &&
+                   !child.matches('.js_language_selector') &&
+                   !(child.matches('li') && child.previousElementSibling?.matches('.divider'));
+        });
+        if (!hasNonUnfoldableItems || header.classList.contains("o_no_autohide_menu")) {
             topMenu.classList.remove('o_menu_loading');
             return;
         }
